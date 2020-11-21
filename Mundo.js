@@ -7,7 +7,10 @@ export class Mundo{
         this.camara.position.set(0,0,0);//---- la camara se inicializa en 0,0,0
         this.escena = new THREE.Scene();
         this.escena.add(this.camara);//---- la camara tiene que estar adentro de la escena para moverse con la escena
-        this.renderizador = new THREE.WebGLRenderer({antialias:true,alpha:true});//---- el renderer tiene que tener alpha:true
+        this.renderizador = new THREE.WebGLRenderer({antialias:true,
+            precision: 'mediump',
+            logarithmicDepthBuffer: true,
+            alpha:true});//---- el renderer tiene que tener alpha:true y parapara evitar unos porblemas de los modelos y mejorar un poco la performance en telefonos son los otros dos paramentros
         this.renderizador.setPixelRatio( window.devicePixelRatio );
         this.renderizador.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( this.renderizador.domElement );
