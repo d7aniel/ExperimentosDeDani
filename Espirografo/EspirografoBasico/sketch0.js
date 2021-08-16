@@ -64,6 +64,10 @@ strokeWeight(0.5);
 }
 
 function setValores(){
+    amplitudes.clear();// = [];
+    velocidades.clear();// = [];
+    angulos.clear();// = [];
+    faces.clear();// = [];
     diametro = height*0.9-height*0.9*random(0.01,0.95)
     ratio = (height*0.9)/diametro
     amplitudes.push(-diametro+height*0.9);
@@ -82,6 +86,7 @@ function setValores(){
 }
 
 function reiniciar(){
+    setValores();
     lista = [];
     angulos = angulos.map(()=>0);
 }
