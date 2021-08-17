@@ -16,14 +16,22 @@ function setup() {
     button.position(10, height-50);
     button.style('width', '15%');
     button.mousePressed(modificar);
+
     button = createButton('Reiniciar grafico');
     button.position(10, height-80);
     button.style('width', '15%');
     button.mousePressed(reiniciar);
 
+    button = createButton('Cambiar Colores');
+    button.position(10, height-110);
+    button.style('width', '15%');
+    button.mousePressed(cambiarColor);
+
     colorP = createColorPicker(fondo);
     colorP.position(10, 30);
     colorP.input(elegirColor);
+
+
 }
 
 function draw() {
@@ -40,28 +48,44 @@ function modificar(){
     for(let e of espirografos){
         e.setValores();
         e.grafico.clear();
-        //image(e.grafico,0,0);
-        //e.angulos = e.angulos.map(()=>0);
     }
-    //lista = [];
 }
 
 function reiniciar(){
     for(let e of espirografos){
         e.grafico.clear();
-        //image(e.grafico,0,0);
         e.angulos = e.angulos.map(()=>0);
     }
-    //lista = [];
 }
 
 function elegirColor(){
-    /*paleta.setColor(colorPicker.color());
-    for(let e of espirografos){
-        e.resetColor(paleta.get());
-    }*/
     fondo = colorP.color();
 }
+
+function getColorHex(color){
+    let r = int(red(color)).toString(16);
+    let g = int(green(color)).toString(16);
+    let b = int(blue(color)).toString(16);
+    let t = "#";
+    t+=r;
+    if(g.length==1)
+    t+=0;
+    t+=g;
+    if(b.length==1)
+    t+=0;
+    t+=b;
+    return t;
+}
+
+function cambiarColor(){
+    paleta.set();
+    colorP.elt.value = getColorHex(paleta.getFondo());//"#ff0000";//getColorHex(paleta.getFondo());
+    fondo = colorP.color();
+    for(let e of espirografos){
+        e.resetColor(getColorHex(paleta.get()));
+    }
+}
+
 //
 // function crearSlider(vmin,vmax,valor,paso,sliders,i,j){
 //     let s = createSlider(vmin ,vmax ,valor ,paso);

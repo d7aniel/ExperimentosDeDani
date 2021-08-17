@@ -110,9 +110,10 @@ class Espirografo{
         this.faces.push(0);//random(TWO_PI));
     }
 
-    /*resetColor(color){
-        this.color = color;
-        this.grafico.stroke(this.color);
-    }*/
+
+
+    resetColor(color){
+        this.color.elt.value = color;
+    }
 
 }

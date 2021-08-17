@@ -4,6 +4,7 @@ class Paleta{
         this.set();
     }
     set(){
+        this.colores = [];
         push();
         colorMode(HSB);
         this.colores = [];
@@ -17,8 +18,6 @@ class Paleta{
         let h = hue(this.colores[0])
         let s = saturation(this.colores[0])
         let b = brightness(this.colores[0])
-
-        console.log(this.colores[0]);
         let brilloCom = oscuro?100:constrain(random(-d3,d3)+b,0,100);
         let satCom = oscuro?100:constrain(random(-d2,d2)+s,0,100);
         this.colores.push(color((180+h)%360,
