@@ -78,7 +78,10 @@ class Espirografo{
             this.angulos[i]+=this.velocidades[i];
         }
         //this.grafico.stroke(255);
-        this.grafico.stroke(this.color.color());
+        let r = red(this.color.color());
+        let g = green(this.color.color());
+        let b = blue(this.color.color());
+        this.grafico.stroke(r,g,b,40);
         this.grafico.line(x,y,px,py);
         //let punto = {x:x, y:y, px:px, py:py};
         //return punto;
