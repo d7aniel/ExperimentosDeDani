@@ -8,6 +8,16 @@ function setup() {
         espirografos.push(new Espirografo(paleta.get()));
     }
     fondo = paleta.getFondo();
+
+    /*button = createButton('Play/Pause');
+    button.position(10, height-50);
+    button.style('width', '15%');
+    button.mousePressed(pp);*/
+
+    button = createButton('Reiniciar');
+    button.position(10, height-80);
+    button.style('width', '15%');
+    button.mousePressed(reiniciar);
 }
 
 function draw() {
@@ -18,6 +28,16 @@ function draw() {
     }
 
 }
+
+function reiniciar(){
+    for(let e of espirografos){
+        e.setValores();
+        //image(e.grafico,0,0);
+        //e.angulos = e.angulos.map(()=>0);
+    }
+    //lista = [];
+}
+
 //
 // function crearSlider(vmin,vmax,valor,paso,sliders,i,j){
 //     let s = createSlider(vmin ,vmax ,valor ,paso);

@@ -1,13 +1,29 @@
 var espirografos = [];
 var paleta;
 var fondo;
+var colorP;;
 function setup() {
     createCanvas(window.innerWidth,window.innerHeight);
     paleta = new Paleta();
     for(let i=0;i<3;i++){
-        espirografos.push(new Espirografo(paleta.get()));
+        let cp = createColorPicker(paleta.get());
+        cp.position(10, 80+i*35);
+        espirografos.push(new Espirografo(cp));
     }
     fondo = paleta.getFondo();
+
+    button = createButton('Modificar Forma');
+    button.position(10, height-50);
+    button.style('width', '15%');
+    button.mousePressed(modificar);
+    button = createButton('Reiniciar grafico');
+    button.position(10, height-80);
+    button.style('width', '15%');
+    button.mousePressed(reiniciar);
+
+    colorP = createColorPicker(fondo);
+    colorP.position(10, 30);
+    colorP.input(elegirColor);
 }
 
 function draw() {
@@ -17,6 +33,34 @@ function draw() {
         image(e.grafico,0,0);
     }
 
+}
+
+
+function modificar(){
+    for(let e of espirografos){
+        e.setValores();
+        e.grafico.clear();
+        //image(e.grafico,0,0);
+        //e.angulos = e.angulos.map(()=>0);
+    }
+    //lista = [];
+}
+
+function reiniciar(){
+    for(let e of espirografos){
+        e.grafico.clear();
+        //image(e.grafico,0,0);
+        e.angulos = e.angulos.map(()=>0);
+    }
+    //lista = [];
+}
+
+function elegirColor(){
+    /*paleta.setColor(colorPicker.color());
+    for(let e of espirografos){
+        e.resetColor(paleta.get());
+    }*/
+    fondo = colorP.color();
 }
 //
 // function crearSlider(vmin,vmax,valor,paso,sliders,i,j){

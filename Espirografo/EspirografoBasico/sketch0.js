@@ -61,13 +61,35 @@ strokeWeight(0.5);
     if (lista.length>1000) {
         lista.pop();
     }
+
+    let t = "";
+    let xt = 20;
+    t+= "Radio externo (Ciruclo Blanco): "+int(height*0.9)+"\n";
+    noStroke();
+    fill(255);
+    text (t,xt,50);
+    let saltoLinea = 30;
+    t = "d1 (Linea Roja): "+int(amplitudes[0])+"\n";
+    fill(255,0,0);
+    text (t,xt,50+saltoLinea);
+    t = "d2 (Linea Azul): "+int(amplitudes[1])+"\n";
+    fill(0,0,255);
+    text (t,xt,50+saltoLinea*2);
+    t = "El radio interno se calcula como \n"
+    t += "(Radio externo - d1) es decir \n"
+    t += ""+int(height*0.9)+" - "+int(amplitudes[0])+"\n";
+    fill(255);
+    text (t,xt,50+saltoLinea*3);
+    t = "Radio interno (Circulo Rojo): "+(int(height*0.9) - int(amplitudes[0]))+"\n";
+    fill(255,0,0);
+    text (t,xt,50+saltoLinea*3+15*3);
 }
 
 function setValores(){
-    amplitudes.clear();// = [];
-    velocidades.clear();// = [];
-    angulos.clear();// = [];
-    faces.clear();// = [];
+    amplitudes = [];
+    velocidades = [];
+    angulos = [];
+    faces = [];
     diametro = height*0.9-height*0.9*random(0.01,0.95)
     ratio = (height*0.9)/diametro
     amplitudes.push(-diametro+height*0.9);

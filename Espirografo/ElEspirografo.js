@@ -9,9 +9,14 @@ class Espirografo{
         this.color = color;//color(random(255),random(255),random(255),100);
         this.setValores();
         this.grafico = createGraphics(width,height);
-        this.grafico.stroke(this.color);
+        this.grafico.stroke(this.color.color());
         this.grafico.strokeCap(SQUARE);
         this.grafico.strokeWeight(2);
+        this.lista = [];
+    }
+
+    dibujar(){
+
     }
 
     dibujar(){
@@ -41,8 +46,23 @@ class Espirografo{
             }
             this.angulos[i]+=this.velocidades[i];
         }
+        //strokeWeight(50);
+        /*noStroke();
+        fill(255);
+        this.grafico.ellipse(x,y,5,5);*/
+        this.lista.unshift({x:x, y:y});
 
-        this.grafico.point(x,y);
+        stroke(255);
+        strokeWeight(0.5);
+            for (let i=0; i<this.lista.length-1; i++) {
+                var p1 = this.lista[i];
+                var p2 = this.lista[i+1];
+                line(p1.x, p1.y, p2.x, p2.y);
+            }
+
+            if (this.lista.length>1000) {
+                this.lista.pop();
+            }
     }
 
     calcularEnGrafico(){
@@ -58,12 +78,18 @@ class Espirografo{
             this.angulos[i]+=this.velocidades[i];
         }
         //this.grafico.stroke(255);
+        this.grafico.stroke(this.color.color());
         this.grafico.line(x,y,px,py);
         //let punto = {x:x, y:y, px:px, py:py};
         //return punto;
     }
 
     setValores(){
+        this.amplitudes = [];
+        this.velocidades = [];
+        this.angulos = [];
+        this.faces = [];
+        this.lista = [];
         let vIni = 0.04;
         console.log(parseInt(random(1,5))*2)
         let diametro = height*0.9-height*0.9*random(0.1,0.9);//(1/(parseInt(random(1,5))*2))
@@ -83,5 +109,10 @@ class Espirografo{
         this.faces.push(0);//random(TWO_PI));
         this.faces.push(0);//random(TWO_PI));
     }
+
+    /*resetColor(color){
+        this.color = color;
+        this.grafico.stroke(this.color);
+    }*/
 
 }
