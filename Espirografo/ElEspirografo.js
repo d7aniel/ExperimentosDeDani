@@ -9,7 +9,7 @@ class Espirografo{
         this.color = color;//color(random(255),random(255),random(255),100);
         this.setValores();
         this.grafico = createGraphics(width,height);
-        this.grafico.stroke(this.color.color());
+        //this.grafico.stroke(this.color.color());
         this.grafico.strokeCap(SQUARE);
         this.grafico.strokeWeight(2);
         this.lista = [];
