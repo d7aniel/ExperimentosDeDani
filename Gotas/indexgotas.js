@@ -21,6 +21,7 @@ var poss = [
 ];
 
 let gotasCubes;
+let gotasCubes2;
 let tiempo = 0;
 // console.log(texto);
 
@@ -70,20 +71,27 @@ iluminarConFoto("./hdr/fondoRedu.png", false);
 
 let tamGaleriaAjustado = false;
 let a = 0;
+const rainbow2 = [new THREE.Color(0x0000fe), new THREE.Color(0x000000), new THREE.Color(0xffffff)];
+const rainbow1 = [new THREE.Color(0xff0000), new THREE.Color(0x005500), new THREE.Color(0x005500), new THREE.Color(0x0000fe)];
 function render(time) {
   if (gotasCubes != null && gotasCubes != undefined) {
     const delta = clock.getDelta();
     tiempo += delta * 0.5;
-    actualizarGotas(gotasCubes, tiempo, 15, false, false, false);
+    actualizarGotas(gotasCubes, tiempo, 17, false, false, false, rainbow1);
+  }
+  if (gotasCubes2 != null && gotasCubes2 != undefined) {
+    const delta = clock.getDelta();
+    tiempo += delta * 0.5;
+    actualizarGotas(gotasCubes2, tiempo, 17, false, false, false, rainbow2);
   }
   a += 0.01;
   // console.log(a);
   // camera.position.z = Math.cos(a) * 25;
   // camera.position.x = Math.sin(a) * 25;
   // camera.position.y = 0;
-  // camera.position.z = 25;
-  // camera.position.x = 2;
-  // camera.position.y = 0;
+  camera.position.z = 25;
+  camera.position.x = 0;
+  camera.position.y = 0;
 
   let rotationMatrix = new THREE.Matrix4();
   let targetQuaternion = new THREE.Quaternion();
@@ -98,8 +106,11 @@ function render(time) {
 
 async function setupObjects() {
   let gotas = new THREE.Object3D();
-  gotasCubes = await cargarGotas(gotas);
+  let gotas2 = new THREE.Object3D();
+  gotasCubes = await cargarGotas(gotas, -0.5);
+  gotasCubes2 = await cargarGotas(gotas, 0.5);
   scene.add(gotas);
+  scene.add(gotas2);
 
   console.log(gotasCubes);
 }

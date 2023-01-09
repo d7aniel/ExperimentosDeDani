@@ -1,7 +1,7 @@
 import { GLTFLoader } from "./three/GLTFLoader.js";
 import { MarchingCubes } from "./three/MarchingCubes.js";
 
-export async function cargarGotas(objetoVacio) {
+export async function cargarGotas(objetoVacio, offset = 0) {
   //envMap: refractionCube, refractionRatio: 0.85
   // new THREE.TextureLoader().load("../hdr/fondoRedu.png", function (texture) {
   //   var texturaCielo = iluminador.fromEquirectangular(texture);
@@ -21,14 +21,15 @@ export async function cargarGotas(objetoVacio) {
   // textureEquirec.encoding = THREE.sRGBEncoding;
   // const material = new THREE.MeshPhongMaterial({ opacity: 0.647, color: 0xffffff, transparent: true, map: textureEquirec });
   // const material = new THREE.MeshPhongMaterial({ opacity: 0.647, transparent: false, shininess: 10, vertexColors: true }); //new THREE.MeshPhongMaterial({ opacity: 0.647, color: 0xffffff, transparent: true, map: textureEquirec });
-  const material = new THREE.MeshBasicMaterial({ opacity: 0.647, transparent: false, shininess: 10, vertexColors: true }); //new THREE.MeshPhongMaterial({ opacity: 0.647, color: 0xffffff, transparent: true, map: textureEquirec });
+  const material = new THREE.MeshBasicMaterial({ opacity: 0.647, transparent: false, shininess: 1, vertexColors: true }); //new THREE.MeshPhongMaterial({ opacity: 0.647, color: 0xffffff, transparent: true, map: textureEquirec });
   // const material = new THREE.MeshLambertMaterial({ opacity: 0.647, transparent: true, color: 0xffffff, envMap: textureEquirec, refractionRatio: 0.85 });
   // console.log(material);
-  let effect = new MarchingCubes(60, material, false, true, 100000);
+  let effect = new MarchingCubes(40, material, false, true, 100000);
   effect.position.set(0, 0, 0);
   // effect.scale.set(1, 1, 3);
   effect.isolation = 100;
   effect.scale.set(15, 15, 15);
+  effect.position.set(15 * offset, 0, 0);
 
   // effect.enableUvs = false;
   // effect.enableColors = true;
@@ -44,7 +45,7 @@ let blobsBasicos = [];
 for (let i = 0; i < 50; i++) {
   blobsBasicos[i] = { x: 0.2 + Math.random() * 0.6, y: Math.random() * -1, z: 0.2 + Math.random() * 0.6, v: 0.5 + Math.random() * 0.5 };
 }
-export function actualizarGotas(object, time, numblobs, floor, wallx, wallz) {
+export function actualizarGotas(object, time, numblobs, floor, wallx, wallz, rainbow) {
   object.reset();
 
   // fill the field with some metaballs
@@ -61,15 +62,15 @@ export function actualizarGotas(object, time, numblobs, floor, wallx, wallz) {
   const subtract = 0.95;
   const strength = 0.65 / ((Math.sqrt(numblobs) - 1) / 4 + 1);
   // numblobs = 0;
-  const rainbow = [
-    new THREE.Color(0xff0000),
-    new THREE.Color(0x005500),
-    new THREE.Color(0x005500),
-    new THREE.Color(0x0000fe),
-    new THREE.Color(0x0000fe),
-    new THREE.Color(0x000000),
-    new THREE.Color(0xffffff),
-  ];
+  // const rainbow = [
+  //   new THREE.Color(0xff0000),
+  //   new THREE.Color(0x005500),
+  //   new THREE.Color(0x005500),
+  //   new THREE.Color(0x0000fe),
+  //   new THREE.Color(0x0000fe),
+  //   new THREE.Color(0x000000),
+  //   new THREE.Color(0xffffff),
+  // ];
   // new THREE.Color(0x00bbff),
   // new THREE.Color(0xaaff00),
   let maximo = 0;
