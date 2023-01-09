@@ -24,9 +24,10 @@ export async function cargarGotas(objetoVacio) {
   const material = new THREE.MeshBasicMaterial({ opacity: 0.647, transparent: false, shininess: 10, vertexColors: true }); //new THREE.MeshPhongMaterial({ opacity: 0.647, color: 0xffffff, transparent: true, map: textureEquirec });
   // const material = new THREE.MeshLambertMaterial({ opacity: 0.647, transparent: true, color: 0xffffff, envMap: textureEquirec, refractionRatio: 0.85 });
   // console.log(material);
-  let effect = new MarchingCubes(48, material, false, true, 100000);
+  let effect = new MarchingCubes(60, material, false, true, 100000);
   effect.position.set(0, 0, 0);
   // effect.scale.set(1, 1, 3);
+  effect.isolation = 100;
   effect.scale.set(15, 15, 15);
 
   // effect.enableUvs = false;
@@ -93,7 +94,7 @@ export function actualizarGotas(object, time, numblobs, floor, wallx, wallz) {
     let multStrg = bally < 0.5 ? mapRange(bally, 0, 0.5, 0, 1) : mapRange(bally, 0.5, 1, 1, 0);
     // let x = Math.abs(2 * Math.sin(1 * ti) - Math.sin(80 * ti));
     // if (maxX < x) {
-    let offsetCabezita = mapRange(multStrg, 0, 1, 0, 0.12);
+    let offsetCabezita = mapRange(multStrg, 0, 1, 0, 0.095);
     const bally2 = bally + offsetCabezita; //1 - mapRange((1 + i) / numblobs, 0, 1, 0.2, 0.8); //mapRange(Math.abs(Math.sin(0.72 * ti) - Math.sin(0.43 * ti)), 0, 2, 0.2, 0.8); //Math.sin(i); // dip into the floor
     //   maxX = x;
     //   console.log("Max x", maxX);

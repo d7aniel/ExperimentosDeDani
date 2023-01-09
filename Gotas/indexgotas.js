@@ -74,7 +74,7 @@ function render(time) {
   if (gotasCubes != null && gotasCubes != undefined) {
     const delta = clock.getDelta();
     tiempo += delta * 0.5;
-    actualizarGotas(gotasCubes, tiempo, 12, false, false, false);
+    actualizarGotas(gotasCubes, tiempo, 15, false, false, false);
   }
   a += 0.01;
   // console.log(a);
